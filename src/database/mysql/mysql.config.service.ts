@@ -17,8 +17,8 @@ export class MySqlConfigService implements TypeOrmOptionsFactory {
       entities: [__dirname + '/../../**/*.entity{.ts,.js}'],
       logging: this.configService.get('NODE_ENV') === 'development',
       migrations: [__dirname + '/../migrations/*{.ts,.js}'],
+      migrationsRun: true,
       // synchronize: true,
-      // migrationsRun: true,
     };
   }
 }

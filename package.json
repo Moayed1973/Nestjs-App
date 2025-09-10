@@ -21,7 +21,10 @@
     "migration:generate": "npm run typeorm -- migration:generate src/database/migrations/InitSchema -d src/database/mysql/data-source.ts",
     "migration:run": "npm run typeorm -- migration:run -d src/database/mysql/data-source.ts",
     "migration:revert": "npm run typeorm -- migration:revert -d src/database/mysql/data-source.ts",
-    "schema:drop": "npm run typeorm -- schema:drop -d src/database/mysql/data-source.ts"
+    "schema:drop": "npm run typeorm -- schema:drop -d src/database/mysql/data-source.ts",
+    "seed": "nest console --no-webpack seed:db",
+    "seed:clear": "nest console --no-webpack seed:clear",
+    "seed:dev": "NODE_ENV=development npm run seed"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -40,6 +43,7 @@
     "lodash": "^4.17.21",
     "mongoose": "^8.18.0",
     "mysql2": "^2.3.3",
+    "nestjs-console": "^10.0.0",
     "nodemailer": "^7.0.6",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
