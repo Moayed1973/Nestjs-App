@@ -1,4 +1,4 @@
-# 🌍 Expanders360 - Global Expansion Management API
+# 🌍 Global Expansion Management API
 
 A NestJS backend for managing global expansion projects, connecting structured data (MySQL) with unstructured research documents (MongoDB).
 
@@ -88,6 +88,48 @@ Where:
 ### Analytics
 
 - `GET /analytics/top-vendors` - Top vendors by country with research counts
+
+### Correct Workflow steps
+
+- Create Admin User
+
+- Create Client Company → Get company ID
+
+- Create Company User for that company
+
+- Create Vendors with services and countries
+
+- Create Projects for the client company
+
+- Generate Matches for projects
+
+- Add Research Documents to projects
+
+- View Analytics across both databases
+
+# 👥 Default Admin User
+
+- **Admin:** `admin@user.com` / `adminpassword`
+
+---
+
+# 🚀 Deployment
+
+The application can be deployed to:
+
+- **Render** (recommended for free tier)
+- **Railway**
+- **AWS Elastic Beanstalk**
+- **Heroku**
+
+---
+
+# 📝 Important Notes
+
+- Company Users must be registered after their **Client Company** exists.
+- Projects belong to **Client Companies**, not individual users.
+- Vendors are created by **Admins only**.
+- Matching requires compatible **countries** and **services**.
 
 ## 🐳 Docker Deployment
 
