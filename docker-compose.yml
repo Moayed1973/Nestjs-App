@@ -5,31 +5,17 @@ services:
     build: .
     ports:
       - '3000:3000'
-    environment:
-      - NODE_ENV=production
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_USERNAME=appuser
-      - DB_PASSWORD=apppass123
-      - DB_DATABASE=expandersApp
-      - MONGODB_URI=mongodb://mongodb:27017/expandersApp
-      - JWT_SECRET=woody1973
+    env_file:
+      - .env
     depends_on:
       - mysql
       - mongodb
-    # REMOVE THESE VOLUMES:
-    # volumes:
-    #   - .:/app
-    #   - /app/node_modules
     restart: unless-stopped
 
   mysql:
     image: mysql:8.0
-    environment:
-      - MYSQL_ROOT_PASSWORD=woody1973
-      - MYSQL_DATABASE=expandersApp
-      - MYSQL_USER=appuser
-      - MYSQL_PASSWORD=apppass123
+    env_file:
+      - .env
     ports:
       - '3306:3306'
     volumes:
@@ -37,9 +23,9 @@ services:
     restart: unless-stopped
 
   mongodb:
-    image: mongo:5.0.22 # Use MongoDB 5 instead of 6
-    environment:
-      - MONGO_INITDB_DATABASE=expandersApp
+    image: mongo:5.0.22
+    env_file:
+      - .env
     ports:
       - '27017:27017'
     volumes:
