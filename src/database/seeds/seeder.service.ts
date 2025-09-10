@@ -11,6 +11,7 @@ import {
   sampleVendors,
   sampleProjects,
 } from './data/sample-data';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class SeederService {
@@ -92,34 +93,32 @@ export class SeederService {
   private async seedUsers(clients: ClientCompany[]) {
     this.logger.log('Seeding users...');
 
+    const saltRounds = 10;
+
     const users = [
       // Admin user
       this.usersRepository.create({
-        email: 'admin@expanders360.com',
-        password:
-          '$2b$10$rOzZzB7W6Uy.7V8pVkzZVeXgKjKJkL8mZzY7V6pXrV3eXyV8pVkzZ', // adminpassword
+        email: 'admin@user.com',
+        password: await bcrypt.hash('adminpassword', saltRounds),
         role: UserRole.Admin,
         companyId: null,
       }),
       // Company users - one for each client
       this.usersRepository.create({
-        email: 'techcorp@expanders360.com',
-        password:
-          '$2b$10$rOzZzB7W6Uy.7V8pVkzZVeXgKjKJkL8mZzY7V6pXrV3eXyV8pVkzZ', // companypassword
+        email: 'techcorp@user.com',
+        password: await bcrypt.hash('companypassword', saltRounds),
         role: UserRole.CompanyUser,
         companyId: clients[0].id,
       }),
       this.usersRepository.create({
-        email: 'globalstartup@expanders360.com',
-        password:
-          '$2b$10$rOzZzB7W6Uy.7V8pVkzZVeXgKjKJkL8mZzY7V6pXrV3eXyV8pVkzZ', // companypassword
+        email: 'globalstartup@user.com',
+        password: await bcrypt.hash('companypassword', saltRounds),
         role: UserRole.CompanyUser,
         companyId: clients[1].id,
       }),
       this.usersRepository.create({
-        email: 'innovatelabs@expanders360.com',
-        password:
-          '$2b$10$rOzZzB7W6Uy.7V8pVkzZVeXgKjKJkL8mZzY7V6pXrV3eXyV8pVkzZ', // companypassword
+        email: 'innovatelabs@user.com',
+        password: await bcrypt.hash('companypassword', saltRounds),
         role: UserRole.CompanyUser,
         companyId: clients[2].id,
       }),
